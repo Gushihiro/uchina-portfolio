@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 import ModeToggle from "@/components/mode-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
 import { useTranslations } from "@/i18n/use-translations"
+import { LangFlip } from "@/components/lang-flip"
 
 export function Navbar() {
   const t = useTranslations()
@@ -14,17 +15,17 @@ export function Navbar() {
     <header className="border-b">
       <div className="container mx-auto flex h-14 items-center justify-between px-4">
         <Link href="/" className="font-semibold">
-          {t.nav.brand}
+          <LangFlip>{t.nav.brand}</LangFlip>
         </Link>
         <nav className="hidden items-center gap-2 sm:flex">
           <Link href="/" className="text-sm hover:underline">
-            {t.nav.home}
+            <LangFlip>{t.nav.home}</LangFlip>
           </Link>
           <Link href="#projects" className="text-sm hover:underline">
-            {t.nav.projects}
+            <LangFlip>{t.nav.projects}</LangFlip>
           </Link>
           <Link href="#contact" className="text-sm hover:underline">
-            {t.nav.contact}
+            <LangFlip>{t.nav.contact}</LangFlip>
           </Link>
           <LanguageToggle />
           <ModeToggle />
@@ -39,7 +40,7 @@ export function Navbar() {
             <SheetContent side="right">
               <SheetTitle className="sr-only">Mobile navigation</SheetTitle>
               <div className="flex items-center justify-between">
-                <span className="font-semibold">{t.nav.brand}</span>
+                <span className="font-semibold"><LangFlip>{t.nav.brand}</LangFlip></span>
                 <div className="flex items-center gap-2">
                   <LanguageToggle />
                   <ModeToggle />
@@ -47,13 +48,13 @@ export function Navbar() {
               </div>
               <div className="mt-6 flex flex-col gap-3">
                 <Link href="/" className="text-sm" prefetch={false}>
-                  {t.nav.home}
+                  <LangFlip>{t.nav.home}</LangFlip>
                 </Link>
                 <Link href="#projects" className="text-sm" prefetch={false}>
-                  {t.nav.projects}
+                  <LangFlip>{t.nav.projects}</LangFlip>
                 </Link>
                 <Link href="#contact" className="text-sm" prefetch={false}>
-                  {t.nav.contact}
+                  <LangFlip>{t.nav.contact}</LangFlip>
                 </Link>
               </div>
             </SheetContent>

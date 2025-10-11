@@ -5,6 +5,7 @@ import { useTranslations } from "@/i18n/use-translations";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/components/language-provider";
 import { SkillsMarquee } from "@/components/skills-marquee";
+import { LangFlip } from "@/components/lang-flip";
 
 export default function Home() {
   const t = useTranslations();
@@ -17,18 +18,18 @@ export default function Home() {
         <section className="flex flex-col gap-4">
           {isJapanese ? (
             <div>
-              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">{t.profile.nameJaKanji}</h1>
-              <p className="text-muted-foreground mt-1">{t.profile.nameJaKana}</p>
+              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight"><LangFlip>{t.profile.nameJaKanji}</LangFlip></h1>
+              <p className="text-muted-foreground mt-1"><LangFlip>{t.profile.nameJaKana}</LangFlip></p>
             </div>
           ) : (
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight">{t.profile.nameEn}</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight"><LangFlip>{t.profile.nameEn}</LangFlip></h1>
           )}
-          <p className="text-lg text-muted-foreground">{t.profile.title}</p>
-          <p className="text-base leading-relaxed">{t.profile.blurb}</p>
+          <p className="text-lg text-muted-foreground"><LangFlip>{t.profile.title}</LangFlip></p>
+          <p className="text-base leading-relaxed"><LangFlip>{t.profile.blurb}</LangFlip></p>
           <div className="mt-4 flex items-center gap-3">
             <Button asChild>
               <Link href="/resume/Hiroto-Robinson-Resume.pdf" target="_blank" rel="noopener noreferrer">
-                {t.profile.resumeCta}
+                <LangFlip>{t.profile.resumeCta}</LangFlip>
               </Link>
             </Button>
             <a
