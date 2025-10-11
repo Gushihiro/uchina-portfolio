@@ -1,4 +1,4 @@
-import { sql } from "@vercel/postgres"
+import { createClient } from "@vercel/postgres"
 import { NextResponse } from "next/server"
 
 type Row = {
@@ -9,8 +9,23 @@ type Row = {
   value: string
 }
 
+function getClient() {
+  const connectionString =
+    process.env.POSTGRES_URL ||
+    process.env.POSTGRES_URL_NON_POOLING ||
+    process.env.POSTGRES_PRISMA_URL ||
+    process.env.DB_POSTGRES_URL ||
+    process.env.DB_POSTGRES_URL_NON_POOLING ||
+    process.env.DB_POSTGRES_PRISMA_URL ||
+    process.env.DB_DATABASE_URL ||
+    process.env.DB_DATABASE_URL_UNPOOLED
+  return createClient({ connectionString })
+}
+
 async function ensureSchema() {
-  await sql`
+  const client = getClient()
+  await client.connect()
+  await client.sql`
     create table if not exists translations (
       id serial primary key,
       locale text not null,
@@ -20,10 +35,13 @@ async function ensureSchema() {
       unique(locale, namespace, key)
     );
   `
+  await client.end()
 }
 
 async function seedIfEmpty() {
-  const { rows: countRows } = await sql<Row>`select count(1)::int as id, '' as locale, '' as namespace, '' as key, '' as value from translations` // id used for count only
+  const client = getClient()
+  await client.connect()
+  const { rows: countRows } = await client.sql<Row>`select count(1)::int as id, '' as locale, '' as namespace, '' as key, '' as value from translations`
   const count = (countRows?.[0]?.id as unknown as number) || 0
   if (count > 0) return
 
@@ -39,19 +57,23 @@ async function seedIfEmpty() {
   ]
 
   for (const entry of seedEntries) {
-    await sql`
+    await client.sql`
       insert into translations (locale, namespace, key, value)
       values (${entry.locale}, ${entry.namespace}, ${entry.key}, ${entry.value})
       on conflict (locale, namespace, key) do update set value = excluded.value;
     `
   }
+  await client.end()
 }
 
 export async function GET() {
   try {
     await ensureSchema()
     await seedIfEmpty()
-    const { rows } = await sql<Row>`select id, locale, namespace, key, value from translations`
+    const client = getClient()
+    await client.connect()
+    const { rows } = await client.sql<Row>`select id, locale, namespace, key, value from translations`
+    await client.end()
     const byLocale = rows.reduce<Record<string, Record<string, Record<string, string>>>>(
       (acc, row) => {
         acc[row.locale] ||= {}

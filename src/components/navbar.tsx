@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import ModeToggle from "@/components/mode-toggle"
 import { LanguageToggle } from "@/components/language-toggle"
 import { useTranslations } from "@/i18n/use-translations"
@@ -37,6 +37,7 @@ export function Navbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
+              <SheetTitle className="sr-only">Mobile navigation</SheetTitle>
               <div className="flex items-center justify-between">
                 <span className="font-semibold">{t.nav.brand}</span>
                 <div className="flex items-center gap-2">
@@ -46,13 +47,13 @@ export function Navbar() {
               </div>
               <div className="mt-6 flex flex-col gap-3">
                 <Link href="/" className="text-sm" prefetch={false}>
-                  Home
+                  {t.nav.home}
                 </Link>
                 <Link href="#projects" className="text-sm" prefetch={false}>
-                  Projects
+                  {t.nav.projects}
                 </Link>
                 <Link href="#contact" className="text-sm" prefetch={false}>
-                  Contact
+                  {t.nav.contact}
                 </Link>
               </div>
             </SheetContent>
