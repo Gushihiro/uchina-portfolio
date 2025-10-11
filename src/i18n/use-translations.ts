@@ -11,6 +11,7 @@ export function useTranslations(): Translations {
     const nav = translations["nav"] || {}
     const home = translations["home"] || {}
     const profile = translations["profile"] || {}
+    const csvToJson = translations["csvToJson"] || {}
     return {
       nav: {
         brand: (nav["brand"] as string) ?? fallback.nav.brand,
@@ -38,6 +39,23 @@ export function useTranslations(): Translations {
         blurb: (profile["blurb"] as string) ?? fallback.profile.blurb,
         resumeCta:
           (profile["resumeCta"] as string) ?? fallback.profile.resumeCta,
+      },
+      csvToJson: {
+        subtitle: (csvToJson["subtitle"] as string) ?? fallback.csvToJson.subtitle,
+        install: (csvToJson["install"] as string) ?? fallback.csvToJson.install,
+        nodeUsage: (csvToJson["nodeUsage"] as string) ?? fallback.csvToJson.nodeUsage,
+        browserUsage: (csvToJson["browserUsage"] as string) ?? fallback.csvToJson.browserUsage,
+        tryIt: (csvToJson["tryIt"] as string) ?? fallback.csvToJson.tryIt,
+        tryItDesc: (csvToJson["tryItDesc"] as string) ?? fallback.csvToJson.tryItDesc,
+        generatedTypes: (csvToJson["generatedTypes"] as string) ?? fallback.csvToJson.generatedTypes,
+        whyItMatters: (csvToJson["whyItMatters"] as string) ?? fallback.csvToJson.whyItMatters,
+        whyDesc: (csvToJson["whyDesc"] as string) ?? fallback.csvToJson.whyDesc,
+        viewOnNpm: (csvToJson["viewOnNpm"] as string) ?? fallback.csvToJson.viewOnNpm,
+        githubRepo: (csvToJson["githubRepo"] as string) ?? fallback.csvToJson.githubRepo,
+        rust: (csvToJson["rust"] as string) ?? fallback.csvToJson.rust,
+        webassembly: (csvToJson["webassembly"] as string) ?? fallback.csvToJson.webassembly,
+        typescript: (csvToJson["typescript"] as string) ?? fallback.csvToJson.typescript,
+        nodeNapi: (csvToJson["nodeNapi"] as string) ?? fallback.csvToJson.nodeNapi,
       },
     }
   }

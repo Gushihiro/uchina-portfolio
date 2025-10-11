@@ -21,7 +21,7 @@ export function Navbar() {
           <Link href="/" className="text-sm hover:underline">
             <LangFlip>{t.nav.home}</LangFlip>
           </Link>
-          <Link href="#projects" className="text-sm hover:underline">
+          <Link href="/projects/csv-to-json" className="text-sm hover:underline">
             <LangFlip>{t.nav.projects}</LangFlip>
           </Link>
           <Link href="#contact" className="text-sm hover:underline">
