@@ -45,11 +45,11 @@ export default function CsvToJsonCaseStudy() {
       // Dynamic import to avoid SSR issues with WASM
       const Csv = await import("@uchina-systems/csv-to-json");
       const bytes = new Uint8Array(await file.arrayBuffer());
-      const out = Csv.parse(bytes, { headers: true, caseStyle: "pascal" as any });
+      const out = Csv.parse(bytes, { headers: true, caseStyle: "pascal" });
       setJson(JSON.stringify(JSON.parse(out), null, 2));
 
       // Demonstrate types generation from parsed rows
-      const parsed = Csv.parseToArray(bytes, { headers: true, caseStyle: "pascal" as any });
+      const parsed = Csv.parseToArray(bytes, { headers: true, caseStyle: "pascal" });
       setRows(parsed);
     } catch (err) {
       setError(String(err));
