@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
@@ -37,10 +36,6 @@ export default function RootLayout({
             <Toaster />
           </LanguageProvider>
         </ThemeProvider>
-        <Script
-          src="http://localhost:1738/api/bot/embedded/1?origin=null&theme=light&position=bottom-right&initialMessage=Hi%20there!%20How%20can%20I%20help%20you%20today%3F&feedbackEnabled=true&feedbackType=thumbs&color=%237c3aed&buttonText=Chat%20with%20us&iconType=chat&autoOpen=false&collectEmail=true"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );
